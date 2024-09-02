@@ -1,15 +1,21 @@
-import sumar from "./auto";
+// src/presenter.js
 
-const first = document.querySelector("#primer-numero");
-const second = document.querySelector("#segundo-numero");
-const form = document.querySelector("#sumar-form");
-const div = document.querySelector("#resultado-div");
+import Auto from './auto';
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+const auto = new Auto();
 
-  const firstNumber = Number.parseInt(first.value);
-  const secondNumber = Number.parseInt(second.value);
+// Funciones para interactuar con el auto
+export function avanzarAuto() {
+    auto.avanzar();
+    console.log(`Posición actual: ${auto.posicion}, Dirección: ${auto.direccion}`);
+}
 
-  div.innerHTML = "<p>" + sumar(firstNumber, secondNumber) + "</p>";
-});
+export function retrocederAuto() {
+    auto.retroceder();
+    console.log(`Posición actual: ${auto.posicion}, Dirección: ${auto.direccion}`);
+}
+
+export function girarAuto(direccion) {
+    auto.girar(direccion);
+    console.log(`Posición actual: ${auto.posicion}, Dirección: ${auto.direccion}`);
+}
