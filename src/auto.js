@@ -1,26 +1,21 @@
 // src/auto.js
 
 export default class Auto {
-  constructor() {
-    this.posicion = 0;          // Inicializa la posición en 0
-    this.direccion = 'norte';   // Inicializa la dirección en 'norte'
+  constructor(x = 0, y = 0, direccion = 'N') {
+    this.posicion = { x, y };   // Posición inicial (x, y)
+    this.direccion = direccion; // Dirección inicial ('N', 'S', 'E', 'W')
   }
 
   avanzar() {
     // Avanza en función de la dirección actual
-    if (this.direccion === 'norte') {
-      this.posicion += 1;   // Aumenta la posición si la dirección es 'norte'
-    } else if (this.direccion === 'sur') {
-      this.posicion -= 1;   // Disminuye la posición si la dirección es 'sur'
-    }
-  }
-
-  retroceder() {
-    // Retrocede en función de la dirección actual
-    if (this.direccion === 'norte') {
-      this.posicion -= 1;   // Disminuye la posición si la dirección es 'norte'
-    } else if (this.direccion === 'sur') {
-      this.posicion += 1;   // Aumenta la posición si la dirección es 'sur'
+    if (this.direccion === 'N') {
+      this.posicion.y += 1; // Avanza hacia el norte
+    } else if (this.direccion === 'S') {
+      this.posicion.y -= 1; // Avanza hacia el sur
+    } else if (this.direccion === 'E') {
+      this.posicion.x += 1; // Avanza hacia el este
+    } else if (this.direccion === 'W') {
+      this.posicion.x -= 1; // Avanza hacia el oeste
     }
   }
 
@@ -28,4 +23,3 @@ export default class Auto {
     this.direccion = direccion; // Cambia la dirección a la nueva dirección
   }
 }
-
