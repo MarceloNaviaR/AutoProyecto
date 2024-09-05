@@ -57,7 +57,7 @@ describe('Auto', () => {
     test('Debe procesar el comando 5,5/1,2N/IAIAIAIAA', () => {
         auto = new Auto(1, 2, 'N', 5, 5); 
         auto.ejecutarComandos('IAIAIAIAA');
-        expect(auto.posicion).toEqual({ x: 2, y: 4 }); 
-        expect(auto.direccion).toBe('E'); 
+        expect(auto.posicion).toEqual({ x: 1, y: 3 }); 
+        expect(auto.direccion).toBe('N'); 
     });
 });
