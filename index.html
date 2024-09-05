@@ -26,21 +26,32 @@
             background-color: red;
             border-radius: 5px;
         }
+        #estado, #input-group {
+            margin-bottom: 20px;
+        }
+        #estado p, #input-group p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
 
     <h1>Control del Auto</h1>
 
-    <!-- Campo de texto para ingresar los comandos -->
-    <label for="comandos">Ingrese los comandos (Ej: 5,5/1,2N/IADA):</label>
-    <input type="text" id="comandos" placeholder="Ej: 5,5/1,2N/IADA" />
-    
-    <button id="ejecutarBtn">Ejecutar Comandos</button>
+    <!-- Grupo de entrada para los comandos -->
+    <div id="input-group">
+        <label for="comandos">Ingrese los comandos (Ej: 5,5/1,2N/IADA):</label>
+        <input type="text" id="comandos" placeholder="Ej: 5,5/1,2N/IADA" />
+        <button id="ejecutarBtn">Ejecutar Comandos</button>
+        <p>Posición Inicial: <span id="posicionInicial"></span></p>
+        <p>Comandos: <span id="comandosTexto"></span></p>
+        
+    </div>
 
+    <!-- Estado del auto después de ejecutar comandos -->
     <div id="estado">
-        <p>Posición: <span id="posicion">1, 2</span></p>
-        <p>Dirección: <span id="direccion">N</span></p>
+        <p>Posición Final: <span id="posicion"></span></p>
+        <p>Dirección Final: <span id="direccion"></span></p>
     </div>
 
     <div id="grid"></div>

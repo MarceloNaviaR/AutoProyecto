@@ -6,6 +6,8 @@ const direccionElem = document.getElementById('direccion');
 const comandosInput = document.getElementById('comandos');
 const ejecutarBtn = document.getElementById('ejecutarBtn');
 const grid = document.getElementById('grid');
+const posicionInicialElem = document.getElementById('posicionInicial');
+const comandosTextoElem = document.getElementById('comandosTexto');
 
 let auto;
 let gridSize = 5; // Inicialmente el tamaño del grid es 5x5
@@ -66,6 +68,10 @@ function ejecutarComandos() {
     // Crear el auto con la posición y dirección inicial
     auto = new Auto(parseInt(x), parseInt(y), direccion, parseInt(maxX), parseInt(maxY));
     placeCar(auto.posicion.x, auto.posicion.y);
+
+    // Actualizar la posición inicial y comandos en el DOM
+    posicionInicialElem.textContent = `${auto.posicion.x}, ${auto.posicion.y}${auto.direccion}`;
+    comandosTextoElem.textContent = secuenciaComandos;
 
     // Ejecutar la secuencia de comandos
     for (let comando of secuenciaComandos) {
