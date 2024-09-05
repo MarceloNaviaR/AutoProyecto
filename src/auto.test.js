@@ -60,4 +60,11 @@ describe('Auto', () => {
         expect(auto.posicion).toEqual({ x: 1, y: 3 }); 
         expect(auto.direccion).toBe('N'); 
     });
+
+    test('Debe procesar el comando 5,5/3,3E/AADAADADDA', () => {
+        auto = new Auto(3, 3, 'E', 5, 5); 
+        auto.ejecutarComandos('AADAADADDA');
+        expect(auto.posicion).toEqual({ x: 2, y: 3 }); 
+        expect(auto.direccion).toBe('N'); 
+    });
 });
