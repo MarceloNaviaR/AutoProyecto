@@ -28,7 +28,15 @@ describe('Auto', () => {
         auto.ejecutarComandos('AAAAAA');
         expect(auto.posicion).toEqual({ x: 1, y: 5 }); // Detiene el avance en el límite
     });
+
+    test('debe girar a la izquierda y avanzar (fallido intencionalmente)', () => {
+        auto.ejecutarComandos('IAAA'); // Girar izquierda (N -> W), avanzar 3 veces
+        expect(auto.posicion).toEqual({ x: 1, y: 3 }); // Esto es incorrecto intencionalmente
+        expect(auto.direccion).toBe('W');
+    });
+    
 });
+
 
 
 
