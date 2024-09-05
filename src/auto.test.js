@@ -32,7 +32,7 @@ describe('Auto', () => {
     test('debe girar a la izquierda y avanzar', () => {
         auto.ejecutarComandos('IAAA');
         expect(auto.posicion).toEqual({ x: 0, y: 2 }); 
-        expect(auto.direccion).toBe('W');
+        expect(auto.direccion).toBe('O');
     });
 
     test('debe girar a la derecha y avanzar', () => {
