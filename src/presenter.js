@@ -48,7 +48,7 @@ function ejecutarComandos() {
     const comandos = comandosInput.value.trim(); // Obtener el valor del input y eliminar espacios en blanco
 
     // Validar el formato de los comandos
-    const regex = /^(\d+),(\d+)\/(\d+),(\d+)([NSEW])\/([IAD]+)$/;
+    const regex = /^(\d+),(\d+)\/(\d+),(\d+)([NSEO])\/([IAD]+)$/;
     const match = comandos.match(regex);
 
     if (!match) {
