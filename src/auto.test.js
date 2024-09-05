@@ -6,7 +6,7 @@ describe('Auto', () => {
     let auto;
 
     beforeEach(() => {
-        auto = new Auto(1, 2, 'N'); // Inicia con posición (1, 2) mirando al norte
+        auto = new Auto(1, 2, 'N', 5, 5); // Inicia con posición (1, 2) mirando al norte
     });
 
     test('debe inicializar con posición (1, 2) y dirección norte', () => {
@@ -19,26 +19,16 @@ describe('Auto', () => {
         expect(auto.posicion).toEqual({ x: 1, y: 3 });
     });
 
-    test('debe avanzar correctamente hacia el sur', () => {
-        auto.girar('S');
-        auto.avanzar();
-        expect(auto.posicion).toEqual({ x: 1, y: 1 });
+    test('debe ejecutar una secuencia de comandos de avanzar correctamente', () => {
+        auto.ejecutarComandos('AAA');
+        expect(auto.posicion).toEqual({ x: 1, y: 5 }); // No debe exceder el límite Y
     });
 
-    test('debe avanzar correctamente hacia el este', () => {
-        auto.girar('E');
-        auto.avanzar();
-        expect(auto.posicion).toEqual({ x: 2, y: 2 });
-    });
-
-    test('debe avanzar correctamente hacia el oeste', () => {
-        auto.girar('W');
-        auto.avanzar();
-        expect(auto.posicion).toEqual({ x: 0, y: 2 });
-    });
-
-    test('debe girar correctamente', () => {
-        auto.girar('S');
-        expect(auto.direccion).toBe('S');
+    test('no debe avanzar más allá del límite del grid', () => {
+        auto.ejecutarComandos('AAAAAA');
+        expect(auto.posicion).toEqual({ x: 1, y: 5 }); // Detiene el avance en el límite
     });
 });
+
+
+

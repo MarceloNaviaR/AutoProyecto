@@ -1,13 +1,14 @@
 // presenter.js
 import Auto from './auto.js';
 
-// Crear una instancia del auto con posición inicial (1, 2) y dirección 'N'
-const auto = new Auto(1, 2, 'N');
+// Crear una instancia del auto con posición inicial (1, 2), dirección 'N' y grid 5x5
+const auto = new Auto(1, 2, 'N', 5, 5);
 
 // Referencias a los elementos del DOM
 const posicionElem = document.getElementById('posicion');
 const direccionElem = document.getElementById('direccion');
-const avanzarBtn = document.getElementById('avanzarBtn');
+const comandosInput = document.getElementById('comandosInput');
+const ejecutarBtn = document.getElementById('ejecutarBtn');
 const grid = document.getElementById('grid');
 
 // Crear el grid de 5x5
@@ -17,8 +18,8 @@ let carElement;
 // Generar celdas del grid y agregar el auto
 function createGrid() {
     grid.innerHTML = ''; // Limpia el grid
-    for (let y = gridSize - 1; y >= 0; y--) {
-        for (let x = 0; x < gridSize; x++) {
+    for (let y = gridSize; y >= 0; y--) {
+        for (let x = 0; x <= gridSize; x++) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
             cell.dataset.x = x;
@@ -46,17 +47,17 @@ function actualizarEstado() {
     direccionElem.textContent = auto.direccion;
 }
 
-// Función para mover el auto al presionar el botón "Avanzar"
-function avanzar() {
-    auto.avanzar();
+// Función para ejecutar los comandos introducidos
+function ejecutarComandos() {
+    const comandos = comandosInput.value.toUpperCase(); // Convertir comandos a mayúsculas
+    auto.ejecutarComandos(comandos); // Ejecutar la cadena de comandos
     placeCar(auto.posicion.x, auto.posicion.y);
     actualizarEstado();
 }
 
-// Listener para el botón de avanzar
-avanzarBtn.addEventListener('click', avanzar);
+// Listener para el botón de ejecutar comandos
+ejecutarBtn.addEventListener('click', ejecutarComandos);
 
 // Inicializa el grid y el estado del auto
 createGrid();
 actualizarEstado();
-
