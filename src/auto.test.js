@@ -1,5 +1,3 @@
-// src/auto.test.js
-
 import Auto from './auto';
 
 describe('Auto', () => {
@@ -21,22 +19,18 @@ describe('Auto', () => {
 
     test('debe ejecutar una secuencia de comandos de avanzar correctamente', () => {
         auto.ejecutarComandos('AAA');
-        expect(auto.posicion).toEqual({ x: 1, y: 5 }); // No debe exceder el límite Y
+        expect(auto.posicion).toEqual({ x: 1, y: 5 }); // Límite del grid
     });
 
     test('no debe avanzar más allá del límite del grid', () => {
         auto.ejecutarComandos('AAAAAA');
-        expect(auto.posicion).toEqual({ x: 1, y: 5 }); // Detiene el avance en el límite
+        expect(auto.posicion).toEqual({ x: 1, y: 5 }); // Límite del grid
     });
 
-    test('debe girar a la izquierda y avanzar (fallido intencionalmente)', () => {
+    test('debe girar a la izquierda y avanzar', () => {
         auto.ejecutarComandos('IAAA'); // Girar izquierda (N -> W), avanzar 3 veces
-        expect(auto.posicion).toEqual({ x: 1, y: 3 }); // Esto es incorrecto intencionalmente
-        expect(auto.direccion).toBe('W');
+        expect(auto.posicion).toEqual({ x: 0, y: 2 }); // Después de girar y avanzar
+        expect(auto.direccion).toBe('W'); // Dirección final
     });
-    
+
 });
-
-
-
-
