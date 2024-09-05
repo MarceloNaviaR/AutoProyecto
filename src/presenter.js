@@ -1,25 +1,20 @@
-// presenter.js
 import Auto from './auto.js';
 
-// Crear una instancia del auto con posición inicial (1, 2), dirección 'N' y grid 5x5
-const auto = new Auto(1, 2, 'N', 5, 5);
-
 // Referencias a los elementos del DOM
-const posicionElem = document.getElementById('posicion');
-const direccionElem = document.getElementById('direccion');
-const comandosInput = document.getElementById('comandosInput');
+const comandosInput = document.getElementById('comandos');
 const ejecutarBtn = document.getElementById('ejecutarBtn');
+const posicionFinalElem = document.getElementById('posicionFinal');
 const grid = document.getElementById('grid');
 
-// Crear el grid de 5x5
-const gridSize = 5;
+let auto;
+let gridSize = 5;
 let carElement;
 
-// Generar celdas del grid y agregar el auto
+// Crear el grid de 5x5
 function createGrid() {
     grid.innerHTML = ''; // Limpia el grid
-    for (let y = gridSize; y >= 0; y--) {
-        for (let x = 0; x <= gridSize; x++) {
+    for (let y = gridSize - 1; y >= 0; y--) {
+        for (let x = 0; x < gridSize; x++) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
             cell.dataset.x = x;
@@ -27,7 +22,6 @@ function createGrid() {
             grid.appendChild(cell);
         }
     }
-    placeCar(auto.posicion.x, auto.posicion.y);
 }
 
 // Colocar el auto en la posición indicada
@@ -41,23 +35,35 @@ function placeCar(x, y) {
     }
 }
 
-// Actualiza el estado del auto en el DOM
-function actualizarEstado() {
-    posicionElem.textContent = `${auto.posicion.x}, ${auto.posicion.y}`;
-    direccionElem.textContent = auto.direccion;
-}
+function ejecutarComandos(comandos) {
+    const [dimensiones, posicionInicial, secuenciaComandos] = comandos.split('/');
+    
+    const [maxX, maxY] = dimensiones.split(',').map(Number);
+    gridSize = Math.max(maxX, maxY); // Actualizar el tamaño del grid
+    createGrid();
+    
+    const [x, y, direccion] = [parseInt(posicionInicial[0]), parseInt(posicionInicial[2]), posicionInicial[3]];
 
-// Función para ejecutar los comandos introducidos
-function ejecutarComandos() {
-    const comandos = comandosInput.value.toUpperCase(); // Convertir comandos a mayúsculas
-    auto.ejecutarComandos(comandos); // Ejecutar la cadena de comandos
+    // Crear el auto en la posición inicial
+    auto = new Auto(x, y, direccion);
     placeCar(auto.posicion.x, auto.posicion.y);
-    actualizarEstado();
+
+    for (let comando of secuenciaComandos) {
+        if (comando === 'I') {
+            auto.girarIzquierda();
+        } else if (comando === 'D') {
+            auto.girarDerecha();
+        } else if (comando === 'A') {
+            auto.avanzar();
+        }
+        placeCar(auto.posicion.x, auto.posicion.y);
+    }
+
+    // Actualizar la posición final en el DOM
+    posicionFinalElem.textContent = `${auto.posicion.x},${auto.posicion.y} ${auto.direccion}`;
 }
 
-// Listener para el botón de ejecutar comandos
-ejecutarBtn.addEventListener('click', ejecutarComandos);
-
-// Inicializa el grid y el estado del auto
-createGrid();
-actualizarEstado();
+ejecutarBtn.addEventListener('click', () => {
+    const comandos = comandosInput.value;
+    ejecutarComandos(comandos);
+});

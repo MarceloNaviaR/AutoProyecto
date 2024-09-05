@@ -29,7 +29,6 @@ export default class Auto {
     let idx = this.direcciones.indexOf(this.direccion);
     this.direccion = this.direcciones[(idx + 1) % this.direcciones.length];
   }
-}
 
   // Método para ejecutar una cadena de comandos de avanzar
   ejecutarComandos(cadena) {
@@ -39,4 +38,5 @@ export default class Auto {
       }
     }
   }
+
 }
