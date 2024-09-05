@@ -35,7 +35,7 @@ describe('Auto', () => {
 
     test('debe girar a la derecha y avanzar', () => {
         auto.ejecutarComandos('DAAA');
-        expect(auto.posicion).toEqual({ x: 4, y: 4 }); 
-        expect(auto.direccion).toBe('N'); 
+        expect(auto.posicion).toEqual({ x: 4, y: 2 }); 
+        expect(auto.direccion).toBe('E'); 
     });
 });
