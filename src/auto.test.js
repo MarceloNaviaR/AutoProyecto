@@ -45,12 +45,12 @@ describe('Auto', () => {
         auto = new Auto(1, 2, 'N', 5, 5);
 
         auto.ejecutarComandos('DDAAAIAAA');
-        expect(auto.posicion).toEqual({ x: 3, y: 5 }); 
-        expect(auto.direccion).toBe('N');
+        expect(auto.posicion).toEqual({ x: 4, y: 0 }); 
+        expect(auto.direccion).toBe('E');
     });
 
-    test('debe manejar comandos que superen el límite del grid correctamente', () => {
-        auto.ejecutarComandos('AAAAAAA'); te
+    test('debe manejar comandos que superen el límite del grid', () => {
+        auto.ejecutarComandos('AAAAAAA'); 
         expect(auto.posicion).toEqual({ x: 1, y: 5 }); 
     });
 });
