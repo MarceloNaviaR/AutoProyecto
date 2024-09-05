@@ -2,9 +2,11 @@ import Auto from './auto';
 
 describe('Auto', () => {
     let auto;
+    let gridSize;
 
     beforeEach(() => {
-        auto = new Auto(1, 2, 'N', 5, 5); // Inicia con posición (1, 2) mirando al norte
+        gridSize = 5; // Definir tamaño del grid como 5x5
+        auto = new Auto(1, 2, 'N', gridSize, gridSize); // Inicializar el auto con la posición y dirección dada
     });
 
     test('debe inicializar con posición (1, 2) y dirección norte', () => {
@@ -36,6 +38,19 @@ describe('Auto', () => {
     test('debe girar a la derecha y avanzar', () => {
         auto.ejecutarComandos('DAAA');
         expect(auto.posicion).toEqual({ x: 4, y: 2 }); 
-        expect(auto.direccion).toBe('E'); 
+        expect(auto.direccion).toBe('E');
+    });
+
+    test('Debe procesar comandos completos correctamente', () => {
+        auto = new Auto(1, 2, 'N', 5, 5);
+
+        auto.ejecutarComandos('DDAAAIAAA');
+        expect(auto.posicion).toEqual({ x: 3, y: 5 }); 
+        expect(auto.direccion).toBe('N');
+    });
+
+    test('debe manejar comandos que superen el límite del grid correctamente', () => {
+        auto.ejecutarComandos('AAAAAAA'); te
+        expect(auto.posicion).toEqual({ x: 1, y: 5 }); 
     });
 });
