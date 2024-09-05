@@ -19,7 +19,7 @@ describe('Auto', () => {
         expect(auto.posicion).toEqual({ x: 1, y: 3 });
     });
 
-    test('debe ejecutar una secuencia de comandos de avanzar correctamente', () => {
+    test('debe ejecutar una secuencia de comandos de avanzar', () => {
         auto.ejecutarComandos('AAA');
         expect(auto.posicion).toEqual({ x: 1, y: 5 }); // Límite del grid
     });
@@ -52,5 +52,12 @@ describe('Auto', () => {
     test('debe manejar comandos que superen el límite del grid', () => {
         auto.ejecutarComandos('AAAAAAA'); 
         expect(auto.posicion).toEqual({ x: 1, y: 5 }); 
+    });
+
+    test('Debe procesar el comando 5,5/1,2N/IAIAIAIAA', () => {
+        auto = new Auto(1, 2, 'N', 5, 5); 
+        auto.ejecutarComandos('IAIAIAIAA');
+        expect(auto.posicion).toEqual({ x: 2, y: 4 }); 
+        expect(auto.direccion).toBe('E'); 
     });
 });
