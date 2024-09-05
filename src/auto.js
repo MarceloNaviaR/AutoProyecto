@@ -20,6 +20,17 @@ export default class Auto {
     }
   }
 
+  girarIzquierda() {
+    let idx = this.direcciones.indexOf(this.direccion);
+    this.direccion = this.direcciones[(idx - 1 + this.direcciones.length) % this.direcciones.length];
+  }
+
+  girarDerecha() {
+    let idx = this.direcciones.indexOf(this.direccion);
+    this.direccion = this.direcciones[(idx + 1) % this.direcciones.length];
+  }
+}
+
   // Método para ejecutar una cadena de comandos de avanzar
   ejecutarComandos(cadena) {
     for (const comando of cadena) {
